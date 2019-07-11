@@ -4,7 +4,7 @@
 
 
 </p>
-
+<p><input type="text" class="form-control" #query (keyup)="filter(query.value)" placeholder="Search..."></p>
 <table class="table">
     <thead>
         <tr>
@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-<tr *ngFor="let p of products$">
+<tr *ngFor="let p of customers">
     <td>{{p.title}}</td>
     <td>{{p.price}}</td>
     <td>
