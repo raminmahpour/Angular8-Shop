@@ -1,2 +1,48 @@
-<p>products works!</p>
-123
+<!-- <div *ngFor="let p of products$ | async" class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{p.imageUrl}}" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{p.title}}</h5>
+      <p class="card-text">{{p.price | currency : 'USD':true}}</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div> -->
+
+
+
+  <div class="row">
+
+
+    <div class="col-3">
+        
+<ul class="list-group">
+
+    <a routerLink="/" [class.active]="category===c.name" [queryParams]="{ category: c.name }" class="list-group-item list-group-item-action" *ngFor="let c of categories$ | async;">
+
+        {{c.name}}
+        
+    </a>
+</ul>
+
+    </div>
+    <div class="col">
+            <div class="row">
+                    <ng-container *ngFor="let p of products$ | async; let i= index">
+                  <div class="col">
+                      
+                          <img class="card-img-top" src="{{p.imageUrl}}" width="18rem" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">{{p.title}}</h5>
+                            <p class="card-text">{{p.price | currency : 'USD':true}}</p>
+                            <a href="#" class="btn btn-primary">Add to card!</a>
+                          </div>
+                  </div>
+                  <div *ngIf="(i+1) % 2 ===0" class="w-100"></div>
+              </ng-container>
+                 
+                  
+                </div>
+
+    </div>
+  </div>
+
+  

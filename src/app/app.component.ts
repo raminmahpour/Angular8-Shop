@@ -12,16 +12,20 @@ export class AppComponent {
  constructor(private auth: AuthService,router:Router, private userService:UserService){
 //alert("man inja");
   auth.user$.subscribe(user=>{
-
+debugger;
     if (user) {
-
+//alert("hi");
       userService.save(user);
 
 
 
 
       let returnUrl=localStorage.getItem('returnUrl');
-      router.navigateByUrl(returnUrl);
+      if (returnUrl) {
+        localStorage.removeItem('returnUrl');
+        router.navigateByUrl(returnUrl);
+      }
+     
       
     }
   });
