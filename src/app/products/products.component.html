@@ -26,7 +26,7 @@
     </div>
     <div class="col">
             <div class="row">
-                    <ng-container *ngFor="let p of products$ | async; let i= index">
+                    <ng-container *ngFor="let p of products | async; let i= index">
                   <div class="col">
                       
                           <img class="card-img-top" src="{{p.imageUrl}}" width="18rem" alt="Card image cap">

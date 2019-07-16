@@ -3,6 +3,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { Observable } from 'rxjs';
 import { AppProduct } from './Model/app-product';
 import { Customer } from './customer';
+import { Product } from './Model/product';
 
 @Injectable({
   providedIn: 'root'

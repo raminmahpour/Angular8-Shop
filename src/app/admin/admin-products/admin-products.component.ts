@@ -13,7 +13,7 @@ import { Product } from 'src/app/Model/product';
   styleUrls: ['./admin-products.component.scss']
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
-  products: any[];
+  products: Product[];
   items = [];
   customers: any;
   filteredProduct: any[];
@@ -50,9 +50,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.filteredProduct = (query) ?
       this.customers.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.customers;
-    console.log("filter");
-    console.log(this.filteredProduct);
-    console.log("-------------");
+    // console.log("filter");
+    // console.log(this.filteredProduct);
+    // console.log("-------------");
   }
 
   getCustomersList() {
@@ -66,9 +66,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
       debugger
       //alert("hi");
       this.customers=this.filteredProduct = customers;
-      console.log("getCustomersList");
-      console.log(this.customers);
-      console.log("-------------");
+      // console.log("getCustomersList");
+      // console.log(this.customers);
+      // console.log("-------------");
     });
   }
 
