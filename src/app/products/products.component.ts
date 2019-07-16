@@ -20,14 +20,24 @@ export class ProductsComponent {
   products;
   categories$;
   category: string;
-  filterProducts: any[];
+  filterProducts;
 
   constructor(
     route: ActivatedRoute,
     productService: ProductService,
     categoryService: CategoryService) {
 
-    this.products = productService.getAll().valueChanges();
+
+      // productService.getAll().snapshotChanges().pipe(
+      //   map(changes =>
+      //     changes.map(c =>
+      //       ({ key: c.payload.key, ...c.payload.val() })
+      //     )
+      //   )
+      // ).subscribe(customers => {
+      //   this.products=this.filterProducts = customers;
+      // });
+   productService.getAll().valueChanges().subscribe(products=>this.products=this.filterProducts= products);
 
     //this.products =productService.getAll().valueChanges().pipe().subscribe(p=>this.productsn=p);
 
@@ -49,21 +59,21 @@ export class ProductsComponent {
 
 // debugger;
 
-      // if (this.category) {
-      //   debugger;
+      if (this.category) {
+        debugger;
 
-      //   // this.products
-      //   // .filter((item)=>item.category == this.category)
-      //   // .subscribe((products) => {
-      //   //    this.filterProducts = products;
-      //   // });
+        // this.products
+        // .filter((item)=>item.category == this.category)
+        // .subscribe((products) => {
+        //    this.filterProducts = products;
+        // });
 
 
-      //   this.filterProducts = this.products.filter(p => p.category === this.category)
-      // }
-      // else {
-      //   this.filterProducts = this.products;
-      // }
+        this.filterProducts = this.products.filter(p => p.category === this.category)
+      }
+      else {
+        this.filterProducts = this.products;
+      }
 
       // this.filterProducts=(this.category) ?
 
@@ -75,6 +85,24 @@ export class ProductsComponent {
     });
   }
 
+  
+  getCustomersList2() {
+  //  this.productService.getAll().snapshotChanges().pipe(
+  //     map(changes =>
+  //       changes.map(c =>
+  //         ({ key: c.payload.key, ...c.payload.val() })
+  //       )
+  //     )
+  //   ).subscribe(customers => {
+  //     debugger
+  //     //alert("hi");
+  //     this.customers=this.filteredProduct = customers;
+
+  //     // console.log("getCustomersList");
+  //     // console.log(this.customers);
+  //     // console.log("-------------");
+  //   });
+  }
   ngOnInit() {
   }
 
