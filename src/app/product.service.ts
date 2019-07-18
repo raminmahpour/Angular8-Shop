@@ -26,13 +26,13 @@ export class ProductService {
   }
 
 
-  getCustomersList(): AngularFireList<Customer> {
+  getCustomersList(){
     return this.customersRef;
   }
 
 
   get(productId) {
-    debugger;
+    // debugger;
     let a = this.db.object(this.dbPath + productId);
     return a;
   }

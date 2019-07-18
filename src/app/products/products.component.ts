@@ -40,7 +40,19 @@ export class ProductsComponent {
 
 
     productService.getAll().valueChanges().subscribe((products: Product[]) => {
-      this.products = this.filterProducts = products
+      this.products = this.filterProducts = products;
+      console.log(this.products);
+
+
+      route.queryParamMap.subscribe(params => {
+        this.category = params.get('category');
+        if (this.category) {
+          this.filterProducts = this.products.filter(p => p.category === this.category)
+        }
+        else {
+          this.filterProducts = this.products;
+        }
+      });
     });
 
     //this.products =productService.getAll().valueChanges().pipe().subscribe(p=>this.productsn=p);
@@ -49,44 +61,7 @@ export class ProductsComponent {
     this.categories$ = categoryService.getCategories().valueChanges();
     //  console.log(this.categories$);
 
-    route.queryParamMap.subscribe(params => {
-
-      this.category = params.get('category');
-      //  this.category = (this.category);
-      // alert(category);
-
-
-
-      //       this.filterProducts = (this.category) ?
-      //       this.products.filter(p => p.category.includes(this.category)) :
-      //       this.products;
-
-      // debugger;
-
-      if (this.category) {
-        debugger;
-
-        // this.products
-        // .filter((item)=>item.category == this.category)
-        // .subscribe((products) => {
-        //    this.filterProducts = products;
-        // });
-
-
-        this.filterProducts = this.products.filter(p => p.category === this.category)
-      }
-      else {
-        this.filterProducts = this.products;
-      }
-
-      // this.filterProducts=(this.category) ?
-
-      // this.products$.filter(p=>p.category===this.category) :
-      // this.products$;
-
-
-
-    });
+  
   }
 
 

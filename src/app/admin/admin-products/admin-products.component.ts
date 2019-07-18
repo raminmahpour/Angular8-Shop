@@ -6,6 +6,7 @@ import { ɵInternalFormsSharedModule } from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/Model/product';
+import { Customer } from 'src/app/customer';
 
 @Component({
   selector: 'app-admin-products',
@@ -15,8 +16,8 @@ import { Product } from 'src/app/Model/product';
 export class AdminProductsComponent implements OnInit, OnDestroy {
   products: Product[];
   items = [];
-  customers: any;
-  filteredProduct: any[];
+  customers: Array<Customer> = [];
+  filteredProduct: Array<Customer> = [];
   subscription: Subscription;
   constructor(private productService: ProductService, private db: AngularFireDatabase) {
 
@@ -62,10 +63,11 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
           ({ key: c.payload.key, ...c.payload.val() })
         )
       )
-    ).subscribe(customers => {
-      debugger
+    ).subscribe((customers: Customer[]) => {
+      //debugger
       //alert("hi");
       this.customers=this.filteredProduct = customers;
+      // Can you see the same error here?
       // console.log("getCustomersList");
       // console.log(this.customers);
       // console.log("-------------");

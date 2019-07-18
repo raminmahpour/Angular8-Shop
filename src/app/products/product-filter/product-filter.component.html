@@ -1,0 +1,12 @@
+<ul class="list-group">
+    
+        <a class="list-group-item list-group-item-action" [class.active]="!category" [routerLink]="['/']">All Categories</a>
+    
+    
+    
+        <a routerLink="/" [class.active]="category===c.name" [queryParams]="{ category: c.name }" class="list-group-item list-group-item-action" *ngFor="let c of categories$ | async;">
+    
+            {{c.name}}
+            
+        </a>
+    </ul>

@@ -9,6 +9,7 @@ import { TouchSequence } from 'selenium-webdriver';
 //import { take } from 'rxjs/operators';
 //import { take } from 'rxjs/internal/operators/take';
 import { take } from 'rxjs/operators';
+import { Product } from 'src/app/Model/product';
 
 @Component({
   selector: 'app-product-form',
@@ -17,12 +18,18 @@ import { take } from 'rxjs/operators';
 })
 export class ProductFormComponent implements OnInit {
   categories$;
-  product={};
+  product: Product = {
+    title: "",
+    price: null,
+    category: "",
+    imageUrl: "",
+    key: ""
+  };
   id;
   constructor(
-    private router:Router,
-    private route:ActivatedRoute,
-    private categoryService: CategoryService, 
+    private router: Router,
+    private route: ActivatedRoute,
+    private categoryService: CategoryService,
     private productService: ProductService) {
 
 
@@ -31,43 +38,54 @@ export class ProductFormComponent implements OnInit {
     //this.afDb.list('Category').valueChanges().subscribe((dUser) => {
     categoryService.getCategories().valueChanges().subscribe((cat) => {
       if (cat) {
-       // debugger;
+        // debugger;
         this.categories$ = cat;
       }
 
+      this.id = this.route.snapshot.paramMap.get("id");
+      if (this.id) {
 
-      this.id= this.route.snapshot.paramMap.get("id");
-     if (this.id) {
-      // debugger;
-     this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe(p=>this.product=p);
-     }
-    });    
+        // debugger;
+        this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe((p: any) => this.product = p);
+      }
+      else {
+        //   alert("3");
+        //   this.product={
+
+        //     title: "",
+        //     price: null,
+        //     category: "",
+        //     imageUrl: "",
+        //     key: ""
+        // }
+      }
+    });
 
     // console.log(this.categories$=categoryService.getCategories());
   }
   save(product) {
-   // console.log(product);
+    // console.log(product);
 
-   if (this.id) {
-     this.productService.update(this.id,product);
-   } else {
-    this.productService.create(product);
-   }
+    if (this.id) {
+      this.productService.update(this.id, product);
+    } else {
+      this.productService.create(product);
+    }
 
     this.router.navigate(['/admin/products']);
 
   }
 
 
-  delete(){
+  delete() {
 
 
-  //  alert(this.id);
+    //  alert(this.id);
 
 
     if (!confirm(" Are you sure?")) {
       return
-      
+
     }
     this.productService.delete(this.id);
     this.router.navigate(['/admin/products']);

@@ -14,14 +14,9 @@
 
     <div class="col-3">
         
-<ul class="list-group">
+<product-filter></product-filter>
 
-    <a routerLink="/" [class.active]="category===c.name" [queryParams]="{ category: c.name }" class="list-group-item list-group-item-action" *ngFor="let c of categories$ | async;">
 
-        {{c.name}}
-        
-    </a>
-</ul>
 
     </div>
     <div class="col">
