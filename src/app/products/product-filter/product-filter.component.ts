@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { CategoryService } from 'src/app/category.service';
 
 @Component({
   selector: 'product-filter',
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-filter.component.scss']
 })
 export class ProductFilterComponent implements OnInit {
+  categories$;
+@Input('category') category;
+  constructor(categoryService :CategoryService) {
 
-  constructor() { }
+
+    this.categories$ = categoryService.getCategories().valueChanges();
+
+
+   }
 
   ngOnInit() {
   }

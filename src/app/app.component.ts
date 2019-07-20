@@ -12,7 +12,7 @@ export class AppComponent {
  constructor(private auth: AuthService,router:Router, private userService:UserService){
 //alert("man inja");
   auth.user$.subscribe(user=>{
-//debugger;
+//// debugger;
     if (user) {
 //alert("hi");
       userService.save(user);

@@ -18,14 +18,14 @@ import { Product } from 'src/app/Model/product';
 export class ProductsComponent {
   //productsn:Product[];
   products: Array<Product> = [];
-  categories$;
+ 
   category: string;
   filterProducts: Array<Product> = [];
 
   constructor(
     route: ActivatedRoute,
-    productService: ProductService,
-    categoryService: CategoryService) {
+    productService: ProductService
+   ) {
 
     // productService.getAll().snapshotChanges().pipe(
     //   map(changes =>
@@ -39,7 +39,13 @@ export class ProductsComponent {
 
 
 
-    productService.getAll().valueChanges().subscribe((products: Product[]) => {
+    productService.getAll().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ $key: c.payload.key, ...c.payload.val() })
+        )
+      )
+    ).subscribe((products: Product[]) => {
       this.products = this.filterProducts = products;
       console.log(this.products);
 
@@ -53,12 +59,36 @@ export class ProductsComponent {
           this.filterProducts = this.products;
         }
       });
+      //alert("hi");
+     // this.customers=this.filteredProduct = customers;
+      // Can you see the same error here?
+      // console.log("getCustomersList");
+      // console.log(this.customers);
+      // console.log("-------------");
     });
+
+
+    // productService.getAll().valueChanges().subscribe((products: Product[]) => {
+      
+    //   this.products = this.filterProducts = products;
+    //   console.log(this.products);
+
+
+    //   route.queryParamMap.subscribe(params => {
+    //     this.category = params.get('category');
+    //     if (this.category) {
+    //       this.filterProducts = this.products.filter(p => p.category === this.category)
+    //     }
+    //     else {
+    //       this.filterProducts = this.products;
+    //     }
+    //   });
+    // });
 
     //this.products =productService.getAll().valueChanges().pipe().subscribe(p=>this.productsn=p);
 
 
-    this.categories$ = categoryService.getCategories().valueChanges();
+    
     //  console.log(this.categories$);
 
   
@@ -73,7 +103,7 @@ export class ProductsComponent {
     //       )
     //     )
     //   ).subscribe(customers => {
-    //     debugger
+    //     // debugger
     //     //alert("hi");
     //     this.customers=this.filteredProduct = customers;
 

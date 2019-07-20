@@ -38,14 +38,14 @@ export class ProductFormComponent implements OnInit {
     //this.afDb.list('Category').valueChanges().subscribe((dUser) => {
     categoryService.getCategories().valueChanges().subscribe((cat) => {
       if (cat) {
-        // debugger;
+        // // debugger;
         this.categories$ = cat;
       }
 
       this.id = this.route.snapshot.paramMap.get("id");
       if (this.id) {
 
-        // debugger;
+        // // debugger;
         this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe((p: any) => this.product = p);
       }
       else {

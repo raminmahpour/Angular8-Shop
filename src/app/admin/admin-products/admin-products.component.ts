@@ -34,7 +34,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     // this.productService.getAll().valueChanges().subscribe((cat) => {
     //   if (cat) {
 
-    //     // debugger;
+    //     // // debugger;
     //     //    this.products$ = cat;
     //     //   console.log(this.products$);
 
@@ -64,7 +64,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         )
       )
     ).subscribe((customers: Customer[]) => {
-      //debugger
+      //// debugger
       //alert("hi");
       this.customers=this.filteredProduct = customers;
       // Can you see the same error here?

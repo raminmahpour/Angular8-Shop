@@ -32,7 +32,7 @@ export class ProductService {
 
 
   get(productId) {
-    // debugger;
+    // // debugger;
     let a = this.db.object(this.dbPath + productId);
     return a;
   }
