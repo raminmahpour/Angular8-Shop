@@ -42,26 +42,24 @@ export class ShoppingCartService {
 
     let cartId = await this.getOrCreateCartId();
     // debugger;
-    let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + product.$key);
+    let productKey = localStorage.getItem('currentProjectKey');
+    let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + productKey);
     // debugger;
     //item$.set({ product: product});
 
     console.log(new Date().getTime());
+    console.log(productKey);
 
     item$.valueChanges().pipe(take(1)).subscribe((p: any) => {
       if (p) {
         item$.update({ quantity: p.quantity + 1 });
       }
       else {
-
-        // delete product.$key
-        //        const $key = product.$key
-        //delete product.$key
-        //this.product2=product;
-        //delete this.product2.$key
+        delete product.$key;
+    
         console.log(product);
         item$.set({ product: product, quantity: 1 });
-        // add product.$key
+        product.$key = productKey;
       }
 
     });

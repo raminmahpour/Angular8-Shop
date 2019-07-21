@@ -22,6 +22,7 @@ export class ProductCardComponent {
 
   addToCard(product: Product) {
     console.log(product);
+    localStorage.setItem('currentProjectKey', product.$key);
     
 // debugger;
     this.cartService.addtoCart(product);
