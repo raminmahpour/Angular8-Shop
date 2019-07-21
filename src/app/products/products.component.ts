@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../product.service';
 import { CategoryService } from '../category.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,6 +8,7 @@ import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/Model/product';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 
 @Component({
@@ -15,18 +16,22 @@ import { Product } from 'src/app/Model/product';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit,OnDestroy {
   //productsn:Product[];
   products: Array<Product> = [];
- 
+ cart:any;
   category: string;
   filterProducts: Array<Product> = [];
+  subscription:Subscription;
 
   constructor(
     route: ActivatedRoute,
-    productService: ProductService
+    productService: ProductService,
+    private shoppingCartService: ShoppingCartService
    ) {
 
+
+   
     // productService.getAll().snapshotChanges().pipe(
     //   map(changes =>
     //     changes.map(c =>
@@ -112,7 +117,20 @@ export class ProductsComponent {
     //     // console.log("-------------");
     //   });
   }
-  ngOnInit() {
+  async ngOnInit() {
+    //let cart= await this.shoppingCartService.getCart();
+debugger;
+this.subscription=(await this.shoppingCartService.getCart()).valueChanges().pipe().subscribe((cart:any)=> this.cart=cart);
+
+// let itemmm=this.shoppingCartService.getCart();
+// itemmm.
+
+
   }
+
+ngOnDestroy(){
+
+  this.subscription.unsubscribe();
+}
 
 }

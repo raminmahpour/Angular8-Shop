@@ -17,7 +17,7 @@ export class ShoppingCartService {
 
 
 
-  private async getOrCreateCartId() {
+  private async getOrCreateCartId():Promise<string> {
 
 
     let cartId = localStorage.getItem('cartId');
@@ -38,17 +38,32 @@ export class ShoppingCartService {
 
 
   }
+async getCart(){
+
+  let cartId=await this.getOrCreateCartId();
+  debugger;
+  return this.db.object('/shopping-cart/'+cartId);
+
+}
+
+
+
+  private getItem(cartId: string, productKey: string) {
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productKey);
+
+  }
+
   async addtoCart(product: Product) {
 
     let cartId = await this.getOrCreateCartId();
     // debugger;
     let productKey = localStorage.getItem('currentProjectKey');
-    let item$ = this.db.object('/shopping-carts/' + cartId + '/items/' + productKey);
+    let item$ = this.getItem(cartId, productKey);
     // debugger;
     //item$.set({ product: product});
 
-    console.log(new Date().getTime());
-    console.log(productKey);
+    //console.log(new Date().getTime());
+    //console.log(productKey);
 
     item$.valueChanges().pipe(take(1)).subscribe((p: any) => {
       if (p) {
@@ -56,7 +71,7 @@ export class ShoppingCartService {
       }
       else {
         delete product.$key;
-    
+
         console.log(product);
         item$.set({ product: product, quantity: 1 });
         product.$key = productKey;
