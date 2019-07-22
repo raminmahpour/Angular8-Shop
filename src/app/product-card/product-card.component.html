@@ -1,13 +1,15 @@
 <div *ngIf="product.title" class="card">
-    <img *ngIf="product.imageUrl" class="card-img-top" src="{{product.imageUrl}}" width="18rem" alt="{{product.title}}">
-    <div class="card-body">
-      <h5 class="card-title">{{product.title}}</h5>
-      <p class="card-text">{{product.price | currency : 'USD':true}}</p>
-    
-    </div>
-    <div *ngIf="showActions" class="card-footer">
-        <button (click)="addToCard(product)" href="#" class="btn btn-primary btn-block">Add to card!</button>
-<div> {{ getQuantity() }}</div>
+  <img *ngIf="product.imageUrl" class="card-img-top" src="{{product.imageUrl}}" width="18rem" alt="{{product.title}}">
+  <div class="card-body">
+    <h5 class="card-title">{{product.title}}</h5>
+    <p class="card-text">{{product.price | currency : 'USD':true}}</p>
 
-    </div>
   </div>
+  <div *ngIf="showActions" class="card-footer">
+    <button (click)="addToCard(product)" href="#" class="btn btn-primary btn-block">Add to card!</button>
+    <div> 
+      {{ getQuantity() }}
+    </div>
+
+  </div>
+</div>

@@ -30,11 +30,12 @@ export class ProductCardComponent {
 
 
   getQuantity() {
-debugger;
+//debugger;
     if (!this.ShoppingCart) {
       return 0;
 
     }
+    debugger;
     let item = this.ShoppingCart.items[this.product.$key];
     return item ? item.quantity : 0;
   }

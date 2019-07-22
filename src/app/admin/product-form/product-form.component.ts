@@ -23,7 +23,8 @@ export class ProductFormComponent implements OnInit {
     price: null,
     category: "",
     imageUrl: "",
-    key: ""
+    key: "",
+    $key:""
   };
   id;
   constructor(
@@ -46,7 +47,7 @@ export class ProductFormComponent implements OnInit {
       if (this.id) {
 
         // // debugger;
-        this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe((p: any) => this.product = p);
+        this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe((p: Product) => this.product = p);
       }
       else {
         //   alert("3");

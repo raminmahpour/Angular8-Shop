@@ -16,22 +16,22 @@ import { ShoppingCartService } from '../shopping-cart.service';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit,OnDestroy {
+export class ProductsComponent implements OnInit, OnDestroy {
   //productsn:Product[];
   products: Array<Product> = [];
- cart:any;
+  cart: any;
   category: string;
   filterProducts: Array<Product> = [];
-  subscription:Subscription;
+  subscription: Subscription;
 
   constructor(
     route: ActivatedRoute,
     productService: ProductService,
     private shoppingCartService: ShoppingCartService
-   ) {
+  ) {
 
 
-   
+
     // productService.getAll().snapshotChanges().pipe(
     //   map(changes =>
     //     changes.map(c =>
@@ -65,7 +65,7 @@ export class ProductsComponent implements OnInit,OnDestroy {
         }
       });
       //alert("hi");
-     // this.customers=this.filteredProduct = customers;
+      // this.customers=this.filteredProduct = customers;
       // Can you see the same error here?
       // console.log("getCustomersList");
       // console.log(this.customers);
@@ -74,7 +74,7 @@ export class ProductsComponent implements OnInit,OnDestroy {
 
 
     // productService.getAll().valueChanges().subscribe((products: Product[]) => {
-      
+
     //   this.products = this.filterProducts = products;
     //   console.log(this.products);
 
@@ -93,44 +93,38 @@ export class ProductsComponent implements OnInit,OnDestroy {
     //this.products =productService.getAll().valueChanges().pipe().subscribe(p=>this.productsn=p);
 
 
-    
+
     //  console.log(this.categories$);
 
-  
+
   }
 
 
-  getCustomersList2() {
-    //  this.productService.getAll().snapshotChanges().pipe(
-    //     map(changes =>
-    //       changes.map(c =>
-    //         ({ key: c.payload.key, ...c.payload.val() })
-    //       )
-    //     )
-    //   ).subscribe(customers => {
-    //     // debugger
-    //     //alert("hi");
-    //     this.customers=this.filteredProduct = customers;
 
-    //     // console.log("getCustomersList");
-    //     // console.log(this.customers);
-    //     // console.log("-------------");
-    //   });
-  }
   async ngOnInit() {
     //let cart= await this.shoppingCartService.getCart();
-debugger;
-this.subscription=(await this.shoppingCartService.getCart()).valueChanges().pipe().subscribe((cart:any)=> this.cart=cart);
 
-// let itemmm=this.shoppingCartService.getCart();
-// itemmm.
+    this.subscription=(await this.shoppingCartService.getCart()).valueChanges().pipe().subscribe((cart:any)=> {
+      debugger;
+      
+      this.cart=cart
+    
+    });
+
+    // let item$ = await this.shoppingCartService.getCart();
+    // debugger;
+    // item$.valueChanges().pipe().subscribe((p: any) => {
+    //  debugger;
+    //   console.log(p);
+
+    // });
 
 
   }
 
-ngOnDestroy(){
+  ngOnDestroy() {
 
-  this.subscription.unsubscribe();
-}
+    this.subscription.unsubscribe();
+  }
 
 }
