@@ -39,14 +39,14 @@ export class ProductFormComponent implements OnInit {
     //this.afDb.list('Category').valueChanges().subscribe((dUser) => {
     categoryService.getCategories().valueChanges().subscribe((cat) => {
       if (cat) {
-        // // debugger;
+        // // //debugger;
         this.categories$ = cat;
       }
 
       this.id = this.route.snapshot.paramMap.get("id");
       if (this.id) {
 
-        // // debugger;
+        // // //debugger;
         this.productService.get(this.id).valueChanges().pipe(take(1)).subscribe((p: Product) => this.product = p);
       }
       else {
@@ -62,10 +62,10 @@ export class ProductFormComponent implements OnInit {
       }
     });
 
-    // console.log(this.categories$=categoryService.getCategories());
+    // //console.log(this.categories$=categoryService.getCategories());
   }
   save(product) {
-    // console.log(product);
+    // //console.log(product);
 
     if (this.id) {
       this.productService.update(this.id, product);

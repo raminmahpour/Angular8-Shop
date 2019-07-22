@@ -27,16 +27,16 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     //   .subscribe(products => this.filteredProduct = this.products = products);
     // // this.products$=  this.productService.getAll();
 
-    // console.log("when loading");
-    // console.log(this.products);
-    // console.log("--------");
+    // //console.log("when loading");
+    // //console.log(this.products);
+    // //console.log("--------");
 
     // this.productService.getAll().valueChanges().subscribe((cat) => {
     //   if (cat) {
 
-    //     // // debugger;
+    //     // // //debugger;
     //     //    this.products$ = cat;
-    //     //   console.log(this.products$);
+    //     //   //console.log(this.products$);
 
 
     //   }
@@ -45,15 +45,15 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   }
 
   filter(query: string) {
-    //console.log(query);
+    ////console.log(query);
 
 
     this.filteredProduct = (query) ?
       this.customers.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.customers;
-    // console.log("filter");
-    // console.log(this.filteredProduct);
-    // console.log("-------------");
+    // //console.log("filter");
+    // //console.log(this.filteredProduct);
+    // //console.log("-------------");
   }
 
   getCustomersList() {
@@ -64,13 +64,13 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
         )
       )
     ).subscribe((customers: Customer[]) => {
-      //// debugger
+      //// //debugger
       //alert("hi");
       this.customers=this.filteredProduct = customers;
       // Can you see the same error here?
-      // console.log("getCustomersList");
-      // console.log(this.customers);
-      // console.log("-------------");
+      // //console.log("getCustomersList");
+      // //console.log(this.customers);
+      // //console.log("-------------");
     });
   }
 

@@ -21,6 +21,6 @@ export class AdminAuthGuardService {
 //
  //   return this.auth.user$
      // .switchMap(user => this.userService.get(user.uid))
-     // .subscribe(appUser=>console.log(appUser.isAdmin));
+     // .subscribe(appUser=>//console.log(appUser.isAdmin));
   //}
 }

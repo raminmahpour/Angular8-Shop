@@ -20,11 +20,11 @@ export class CategoryService {
 
     let ggg=this.db.list('/Category');
 
-    console.log(ggg);
+    //console.log(ggg);
     return this.db.list('/Category');
   
     
-    //console.log(this.db.list('/Category'));
+    ////console.log(this.db.list('/Category'));
   }
 
   

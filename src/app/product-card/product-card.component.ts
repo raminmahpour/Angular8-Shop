@@ -17,25 +17,29 @@ export class ProductCardComponent {
   constructor(private cartService: ShoppingCartService) {
   }
 
-  addToCard(product: Product) {
-    console.log(product);
-    localStorage.setItem('currentProjectKey', product.$key);
+  addToCard() {
+    
+    
+    localStorage.setItem('currentProjectKey', this.product.$key);
 
-    // debugger;
-    this.cartService.addtoCart(product);
+    this.cartService.addtoCart(this.product);
+ 
+  }
 
-
+  RemoveFromCart(){
+    localStorage.setItem('currentProjectKey', this.product.$key);
+this.cartService.RemoveFromCart(this.product);
 
   }
 
 
   getQuantity() {
-//debugger;
+    ////debugger;
     if (!this.ShoppingCart) {
       return 0;
 
     }
-    debugger;
+    //debugger;
     let item = this.ShoppingCart.items[this.product.$key];
     return item ? item.quantity : 0;
   }

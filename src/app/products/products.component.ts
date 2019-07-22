@@ -52,7 +52,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       )
     ).subscribe((products: Product[]) => {
       this.products = this.filterProducts = products;
-      console.log(this.products);
+      //console.log(this.products);
 
 
       route.queryParamMap.subscribe(params => {
@@ -67,16 +67,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
       //alert("hi");
       // this.customers=this.filteredProduct = customers;
       // Can you see the same error here?
-      // console.log("getCustomersList");
-      // console.log(this.customers);
-      // console.log("-------------");
+      // //console.log("getCustomersList");
+      // //console.log(this.customers);
+      // //console.log("-------------");
     });
 
 
     // productService.getAll().valueChanges().subscribe((products: Product[]) => {
 
     //   this.products = this.filterProducts = products;
-    //   console.log(this.products);
+    //   //console.log(this.products);
 
 
     //   route.queryParamMap.subscribe(params => {
@@ -94,7 +94,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
 
-    //  console.log(this.categories$);
+    //  //console.log(this.categories$);
 
 
   }
@@ -104,7 +104,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   async ngOnInit() {
 
     this.subscription=(await this.shoppingCartService.getCart()).valueChanges().pipe().subscribe((cart:any)=> {
-      debugger;
+      //debugger;
       
       this.cart=cart
     

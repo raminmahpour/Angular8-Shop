@@ -15,7 +15,7 @@ export class LoginComponent{
 
 
 
-    //afAuth.authState.subscribe(x=>console.log(x));
+    //afAuth.authState.subscribe(x=>//console.log(x));
    }
 
 

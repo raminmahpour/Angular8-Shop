@@ -9,6 +9,10 @@ import { take } from 'rxjs/operators';
 })
 export class ShoppingCartService {
 
+
+
+ 
+
   //product2:Product;
   constructor(private db: AngularFireDatabase) {
 
@@ -23,7 +27,7 @@ export class ShoppingCartService {
     let cartId = localStorage.getItem('cartId');
     if (cartId) return cartId;
 
-    // debugger;
+    // //debugger;
     let result = await this.create();
     localStorage.setItem('cartId', result.key);
     // this.create().then(result => {
@@ -43,15 +47,15 @@ export class ShoppingCartService {
     let cartId = await this.getOrCreateCartId();
    
     let result = this.db.object('/shopping-carts/' + cartId);
-   // debugger;
+   // //debugger;
 
     // result.valueChanges().pipe(take(1)).subscribe((p: any) => {
     //   if (p) {
-    //    debugger;
+    //    //debugger;
     //   }
     //   else {
  
-    //     debugger;
+    //     //debugger;
     //   }
 
     // });
@@ -69,10 +73,34 @@ export class ShoppingCartService {
 
   }
 
+
+  async RemoveFromCart(product: Product) {
+    
+    let cartId = await this.getOrCreateCartId();
+    // //debugger;
+    let productKey = localStorage.getItem('currentProjectKey');
+    let item$ = this.getItem(cartId, productKey);
+
+    item$.valueChanges().pipe(take(1)).subscribe((p: any) => {
+      if (p) {
+        item$.update({ quantity: p.quantity - 1 });
+      }
+      else {
+        delete product.$key;
+
+      //  //console.log(product);
+        item$.update({ product: product, quantity: 1 });
+        product.$key = productKey;
+      }
+
+    });
+  }
+
+  
   async addtoCart(product: Product) {
 
     let cartId = await this.getOrCreateCartId();
-    // debugger;
+    // //debugger;
     let productKey = localStorage.getItem('currentProjectKey');
     let item$ = this.getItem(cartId, productKey);
 
@@ -83,7 +111,7 @@ export class ShoppingCartService {
       else {
         delete product.$key;
 
-      //  console.log(product);
+      //  //console.log(product);
         item$.set({ product: product, quantity: 1 });
         product.$key = productKey;
       }
