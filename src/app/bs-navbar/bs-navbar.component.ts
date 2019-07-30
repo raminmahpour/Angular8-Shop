@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ShoppingCartService } from '../shopping-cart.service';
 
 import { ShoppingCart } from '../Model/shopping-cart';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'bs-navbar',
@@ -17,16 +18,26 @@ export class BsNavbarComponent implements OnInit {
   user$: Observable<firebase.User>;
   shoppingCartItemCount: number;
   cart$: Observable<ShoppingCart>;
-  constructor(private auth: AngularFireAuth, private shoppingCartService: ShoppingCartService) {
+  constructor(
+    private auth: AngularFireAuth, 
+    private shoppingCartService: ShoppingCartService,
+    private router: Router
+    ) {
 
     // afAuth.authState.subscribe(user => this.user=user);
     this.user$ = auth.authState;
 
   }
 
+  goToShoppingCart(){
+    this.router.navigate(['shopping-cart']);
+  }
+
   async ngOnInit() {
 
     this.cart$ = await this.shoppingCartService.getCart();
+    
+
     // let cart$ = await this.shoppingCartService.getCart();
     // cart$.valueChanges().subscribe(cart => {
     //   debugger;

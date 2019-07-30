@@ -62,7 +62,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 
       { path: '', component: ProductsComponent },
       { path: 'products', component: ProductsComponent },
-      { path: 'shopping-card', component: ShoppingCartComponent },
+      { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'login', component: LoginComponent },
 
 

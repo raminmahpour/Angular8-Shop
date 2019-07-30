@@ -19,7 +19,7 @@ export class ShoppingCartService {
 
 
 
- 
+
 
   //product2:Product;
   constructor(private db: AngularFireDatabase) {
@@ -58,14 +58,17 @@ export class ShoppingCartService {
   // }
 
 
-  async getCart():Promise<Observable<ShoppingCart>>{
+  async getCart(): Promise<Observable<ShoppingCart>> {
 
-    let cartId = await this.getOrCreateCartId();  
-   // debugger; 
-    return this.db.object('/shopping-carts/' + cartId).valueChanges().pipe(map((x:any)=>new ShoppingCart(x.items)));
+    let cartId = await this.getOrCreateCartId();
+    debugger;
+    let ok = this.db.object('/shopping-carts/' + cartId).valueChanges().pipe(map((x: any) =>
+      new ShoppingCart(x.items)
+    ));
 
+    return ok;
   }
- 
+
 
 
   private getItem(cartId: string, productKey: string) {
@@ -75,7 +78,7 @@ export class ShoppingCartService {
 
 
   async RemoveFromCart(product: Product) {
-    
+
     let cartId = await this.getOrCreateCartId();
     // //debugger;
     let productKey = localStorage.getItem('currentProjectKey');
@@ -88,7 +91,7 @@ export class ShoppingCartService {
       else {
         delete product.$key;
 
-      //  //console.log(product);
+        //  //console.log(product);
         item$.update({ product: product, quantity: 1 });
         product.$key = productKey;
       }
@@ -96,7 +99,7 @@ export class ShoppingCartService {
     });
   }
 
-  
+
   async addtoCart(product: Product) {
 
     let cartId = await this.getOrCreateCartId();
@@ -111,7 +114,7 @@ export class ShoppingCartService {
       else {
         delete product.$key;
 
-      //  //console.log(product);
+        //  //console.log(product);
         item$.set({ product: product, quantity: 1 });
         product.$key = productKey;
       }
